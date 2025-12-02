@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 void chuViVaDienTichHinhTron()
 {
@@ -152,46 +153,58 @@ void sapXepPhanTuMang1Chieu()
         printf("Mang [%d] = \n", i, intergerArray[i]);
     }
 }
+
+void mangHaiChieu()
+{
+    int array[2][3];
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("Mang[%d][%d] = ", i, j);
+            scanf_s("%d", &array[i][j]);
+        }
+
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%d,  ", array[i][j]);
+
+        }
+        printf("\n");
+    }
+}
+
+void mangKiTu() {
+    char mangKiTu[10] = "Duc";
+    for (int i = 0; i < 3; i++)
+    {
+        scanf_s("% c", &mangKiTu[i]);
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        printf("%c", mangKiTu[i]);
+    }
+}
+
 int main()
 {
-    void sapXepPhanTuMang1Chieu();
+    void mangKiTu(); 
     {
-        int intergerArray[100];
-        int tmp;
-        int length;
-        int i;
-        printf("Nhap so lg phan tu mang: ");
-        scanf_s("%d", &length);
-        printf("Nhap so tu mang %d lg phan: \n", length
-        );
-        for (i = 0; i < length; i++)
+        char mangKiTu[10] = "Duc";
+        for (int i = 0; i < 3; i++)
         {
-            printf("Mang [%d] = ", i);
-            scanf_s("%d", &intergerArray[i]);
+            scanf_s(" %c", &mangKiTu[i]);
         }
-        printf("Sap xep tang dan tu mang %d lg phan: \n", length);
-        for (i = 0; i < length - 1; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if (intergerArray[i] > intergerArray[i + 1])
-            {
-                tmp = intergerArray[i];
-                intergerArray[i + 1] = intergerArray[i];
-                intergerArray[i + 1] = tmp;
-                i = -1;
-            }
-        }
-        printf("Xuat so tu mang %d tang dan: \n", length);
-        for (i = 0; i < length; i++)
-        {
-            printf("Mang [%d] = %d \n", i, intergerArray[i]);
-        }
-        printf("Xuat so tu mang %d giam dan: \n", length);
-        for (i = length - 1; i > -1; i--)
-        {
-            printf("Mang [%d] = %d \n", i, intergerArray[i]);
+            printf(" %c", mangKiTu[i]);
         }
     }
 }
+
 
 // Debug/Run chuong trinh: bam "F5" hoac "Debug > Start Debugging" tren menu
 
