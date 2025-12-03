@@ -2,10 +2,309 @@
 // Chuong trinh phan mem Bat dau thuc thi & Ket thuc o day.
 
 #include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
+
+bool kiemtrasonguyento(int n) {
+    if (n < 2) return false;
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+bool kiemTraSoChinhPhuong(int n) {
+    int canBacHai = sqrt(n);
+    return (canBacHai * canBacHai == n);
+}
+void kiemTraSoNguyen()
+{
+    int i = 1;
+    while (i == 1)
+    {
+        int x;
+        printf("nhap x: "); scanf_s("%d", &x);
+
+        printf("so %d la so nguyen.\n", x);
+
+        if (kiemtrasonguyento(x)) {
+            printf("so %d la so nguyen to.\n", x);
+        }
+        else {
+            printf("so %d khong la so nguyen to.\n", x);
+        }
+        if (kiemTraSoChinhPhuong(x)) {
+            printf("so %d la so chinh phuong.\n", x);
+        }
+        else {
+            printf("so %d khong la so chinh phuong.\n", x);
+        }
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
+
+int timUCLN(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+int timBCNN(int a, int b) {
+    return (a * b) / timUCLN(a, b);
+}
+void timUocBoiChung() {
+    
+    int i = 1;
+    while (i == 1)
+    {
+        system("cls");
+        int x, y;
+        printf("nhap vao 2 so nguyen x = , y = "); scanf_s("%d %d", &x, &y);
+
+        int uscln = timUCLN(x, y);
+        int bscnn = timBCNN(x, y);
+
+        printf("Uoc so chung lon nhat %d va %d la %d \n", x, y, uscln);
+        printf("Boi chung nho nhat %d va %d la %d \n", x, y, bscnn);
+      
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
+
+float tinhTienKaraoke(int gioBatDau, int gioKetThuc) {
+    int soGio = gioKetThuc - gioBatDau;
+    float tongTien = 0;
+
+  
+    if (gioBatDau < 12 || gioKetThuc > 23 || gioBatDau >= gioKetThuc) {
+        printf("Gio bat dau & ket thuc khong hop le ...\n");
+        return -1;
+    }
+
+ 
+    if (soGio <= 3) {
+        tongTien = soGio * 150000;
+    }
+    else {
+        tongTien = 3 * 150000 + (soGio - 3) * 150000 * 0.7;
+    }
+    if (gioBatDau >= 14 && gioBatDau <= 17) {
+        tongTien *= 0.9;
+    }
+
+    return tongTien;
+}
+void tinhTienChoKaraoke() {
+    int i = 1;
+    while (i == 1)
+    {
+        int gioBatDau, gioKetThuc;
+        printf("nhap gio bat dau (12h-23h): "); scanf_s("%d", &gioBatDau);
+        printf("nhap gio ket thuc(12h-23h): "); scanf_s("%d", &gioKetThuc);
+
+        float tien = tinhTienKaraoke(gioBatDau, gioKetThuc);
+        if (tien != -1) {
+        printf("Tong tien can thanh toan: %.2f VND\n", tien);
+        }
+        
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
+
+float tinhTienDien(int soKwh) {
+    float tongTien = 0;
+
+    if (soKwh <= 50) {
+        tongTien = soKwh * 1678;
+    }
+        else if (soKwh <= 100) {
+            tongTien = 50 * 1678 + (soKwh - 50) * 1734;
+        }
+        else if (soKwh <= 200) {
+            tongTien = 50 * 1678 + 50 * 1734 + (soKwh - 100) * 2014;
+        }
+        else if (soKwh <= 300) {
+            tongTien = 50 * 1678 + 50 * 1734 + 100 * 2014 + (soKwh - 200) * 2536;
+        }
+        else if (soKwh <= 400) {
+            tongTien = 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + (soKwh - 300) * 2834;
+        }
+    else {
+        tongTien = 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + 100 * 2834 + (soKwh - 400) * 2927;
+    }
+    return tongTien;
+}
+void tinhTienDienBacThang() {
+    
+    int i = 1;
+    while (i == 1)
+    {
+        int soKwh;
+        printf("Nhap so soKwh tieu thu: "); 
+        scanf_s("%d", &soKwh);
+
+        if (soKwh < 0) {
+        printf("So soKwh tieu thu khong hop le! \n");
+        return;
+        }
+
+        float tien = tinhTienDien(soKwh);
+        printf("So tien dien can thanh toan: %.2f VND \n", tien);
+
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
+
+
+void MenuASM()
+{
+    int chon;
+    do
+    {
+
+        printf("* Menu Chuc Nang *"); printf("\n");
+        printf("1. Kiem tra so nguyen"); printf("\n");
+        printf("2. Uoc chung & Boi chung cua 2 so"); printf("\n");
+        printf("3. Tinh tien quan Karaoke"); printf("\n");
+        printf("4. Tinh tien dien"); printf("\n");
+        printf("5. Doi tien"); printf("\n");
+        printf("6. Tinh lai xuat vay ngan hang tra gop"); printf("\n");
+        printf("7. Vay tien mua xe"); printf("\n");
+        printf("8. Sap xep thong tin sinh vien"); printf("\n");
+        printf("9. Xay u game FPOLY-LOTT"); printf("\n");
+        printf("10. Tinh toan phan so"); printf("\n");
+        printf("0. thoat"); printf("\n");
+        printf("xin moi chon chuc nang tren menu: ");
+        scanf_s("%d", &chon);
+
+        switch (chon)
+        {
+        case 1:
+            kiemTraSoNguyen();
+            break;
+        case 2:
+            kiemTraSoNguyen();
+            break;
+        case 3:
+            kiemTraSoNguyen();
+            break;
+        case 4:
+            kiemTraSoNguyen();
+            break;
+        case 5:
+            kiemTraSoNguyen();
+            break;
+        case 6:
+            kiemTraSoNguyen();
+            break;
+        case 7:
+            kiemTraSoNguyen();
+            break;
+        case 8:
+            kiemTraSoNguyen();
+            break;
+        case 9:
+            kiemTraSoNguyen();
+            break;
+        case 10:
+            kiemTraSoNguyen();
+            break;
+        case 0:
+            printf("THOAT");
+            break;
+        default:
+            printf("Xin moi nhap dung chuc nang tren menu [1-10]");
+            break;
+
+        }
+
+
+
+    } while (chon != 0);
+}
+
+
+
+
 
 int main()
 {
-    printf("Hi there!\n");
+    void MenuASM();
+    {
+        int chon;
+        do
+        {
+            system("cls");
+            printf("* Menu Chuc Nang *"); printf("\n");
+            printf("1. Kiem tra so nguyen"); printf("\n");
+            printf("2. Uoc chung & Boi chung cua 2 so"); printf("\n");
+            printf("3. Tinh tien quan Karaoke"); printf("\n");
+            printf("4. Tinh tien dien"); printf("\n");
+            printf("5. Doi tien"); printf("\n");
+            printf("6. Tinh lai xuat vay ngan hang tra gop"); printf("\n");
+            printf("7. Vay tien mua xe"); printf("\n");
+            printf("8. Sap xep thong tin sinh vien"); printf("\n");
+            printf("9. Xay u game FPOLY-LOTT"); printf("\n");
+            printf("10. Tinh toan phan so"); printf("\n");
+            printf("0. thoat"); printf("\n");
+            printf("xin moi chon chuc nang tren menu: ");
+            scanf_s("%d", &chon);
+
+            switch (chon)
+            {
+            case 1:
+                kiemTraSoNguyen();
+                break;
+            case 2:
+                timUocBoiChung();
+                break;
+            case 3:
+                tinhTienChoKaraoke();
+                break;
+            case 4:
+                tinhTienDienBacThang();
+                break;
+            case 5:
+                kiemTraSoNguyen();
+                break;
+            case 6:
+                kiemTraSoNguyen();
+                break;
+            case 7:
+                kiemTraSoNguyen();
+                break;
+            case 8:
+                kiemTraSoNguyen();
+                break;
+            case 9:
+                kiemTraSoNguyen();
+                break;
+            case 10:
+                kiemTraSoNguyen();
+                break;
+            case 0:
+                printf("THOAT");
+                break;
+            default:
+                printf("Xin moi nhap dung chuc nang tren menu [1-10]");
+                break;
+
+            }
+
+
+
+        } while (chon != 0);
+    }
+
 }
 
 // Debug/Run chuong trinh: bam "F5" hoac "Debug > Start Debugging" tren menu
