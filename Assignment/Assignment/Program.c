@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
+
+
 //code kiểm tra số nguyên
 bool kiemtrasonguyento(int n) {
     if (n < 2) return false;
@@ -44,6 +48,7 @@ void kiemTraSoNguyen()
 
     }
 }
+
 //code tìm ước bội chung
 int timUCLN(int a, int b) {
     while (b != 0) {
@@ -76,6 +81,7 @@ void timUocBoiChung() {
 
     }
 }
+
 // code tính tiền karaoke
 float tinhTienKaraoke(int gioBatDau, int gioKetThuc) {
     int soGio = gioKetThuc - gioBatDau;
@@ -119,6 +125,7 @@ void tinhTienChoKaraoke() {
 
     }
 }
+
 // code tính tiền điện
 float tinhTienDien(int soKwh) {
     float tongTien = 0;
@@ -166,6 +173,7 @@ void tinhTienDienBacThang() {
 
     }
 }
+
 // code đổi tiền
 void doiTien() {
    
@@ -203,6 +211,7 @@ void doiTien() {
 
     }
 }
+
 // code Tính toán vay ngân hàng
 void tinhToanVayNganHang() {
     
@@ -240,6 +249,7 @@ void tinhToanVayNganHang() {
 
     }
 }
+
 // code Tính tiền vay mua xe
 void tinhTienVayMuaXe() {
 
@@ -285,6 +295,55 @@ void tinhTienVayMuaXe() {
 
     }
 }
+
+// code play FPOly_LOTT
+void playFPOLY_LOTT() 
+{
+    int i = 1;
+    while (i == 1)
+    {
+        system("cls");
+        int user1, user2;
+        int rand1, rand2;
+        int match = 0;
+
+        srand(time(NULL));
+
+        printf("Nhap so thu nhat (01-15): ");
+        scanf_s("%d", &user1);
+        printf("Nhap so thu hai (01-15): ");
+        scanf_s("%d", &user2);
+
+        if (user1 < 1 || user1 > 15 || user2 < 1 || user2 > 15 || user1 == user2) {
+            printf("Du lieu khong hop le. Vui long nhap hai so khac nhau tu 01 den 15.\n");
+            return;
+        }
+
+        rand1 = rand() % 15 + 1;
+        do {
+            rand2 = rand() % 15 + 1;
+        } while (rand2 == rand1);
+
+        printf("So trung thuong la: %02d va %02d\n", rand1, rand2);
+
+        if (user1 == rand1 || user1 == rand2) match++;
+        if (user2 == rand1 || user2 == rand2) match++;
+
+        if (match == 0) {
+            printf("Chuc ban may man lan sau!\n");
+        }
+        else if (match == 1) {
+            printf("Chuc mung! Ban da trung giai NHI!\n");
+        }
+        else {
+            printf("Chuc mung! Ban da trung giai NHAT!\n");
+        }
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
+
 
 
 
@@ -408,13 +467,13 @@ int main()
                 tinhTienVayMuaXe();
                 break;
             case 8:
-                kiemTraSoNguyen();
+                
                 break;
             case 9:
-                kiemTraSoNguyen();
+                playFPOLY_LOTT();
                 break;
             case 10:
-                kiemTraSoNguyen();
+                
                 break;
             case 0:
                 printf("THOAT");
