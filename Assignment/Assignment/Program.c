@@ -240,7 +240,51 @@ void tinhToanVayNganHang() {
 
     }
 }
+// code Tính tiền vay mua xe
+void tinhTienVayMuaXe() {
 
+    int i = 1;
+    while (i == 1)
+    {
+        system("cls");
+        float tyLeVay;
+        printf("Nhap ty le vay (%%): ");
+        scanf("%f", &tyLeVay);
+
+        if (tyLeVay <= 0 || tyLeVay > 100) {
+            printf("Ty le vay không hop le! Vui long nhap tu 1 den 100.\n");
+        }
+        else {
+            float giaTriXe = 500000000; // Giá trị cố định 500 triệu VND
+            float laiSuatNam = 0.072;   // Lãi suất cố định 7.2% mỗi năm
+            int soNamVay = 2;           // Kỳ hạn vay 2 năm = 24 tháng
+
+            float soTienVay = (tyLeVay / 100) * giaTriXe;
+            float tienTraTruoc = giaTriXe - soTienVay;
+            float laiSuatThang = laiSuatNam / 12;
+            int soThangVay = soNamVay * 12;
+            float tienGocHangThang = soTienVay / soThangVay;
+            float tongTienTra = 0;
+
+            printf("Gia tri xe: %.2f VND\n", giaTriXe);
+            printf("So tien tra truoc: %.2f VND\n", tienTraTruoc);
+            printf("Chi tiet cac khoan phai tra hang thang:\n");
+
+            for (int thang = 1; thang <= soThangVay; thang++) {
+                float tienLaiThang = soTienVay * laiSuatThang;
+                float tienTraHangThang = tienGocHangThang + tienLaiThang;
+                printf("Thang %d: Tien goc = %.2f, Tien lai = %.2f, Tong = %.2f\n", thang, tienGocHangThang, tienLaiThang, tienTraHangThang);
+                tongTienTra += tienTraHangThang;
+                soTienVay -= tienGocHangThang; // Giảm dư nợ khi trả gốc
+            }
+
+            printf("Tong so tien phai tra sau %d thang: %.2f VND\n", soThangVay, tongTienTra);
+        }
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
 
 
 
@@ -361,7 +405,7 @@ int main()
                 tinhToanVayNganHang();
                 break;
             case 7:
-                kiemTraSoNguyen();
+                tinhTienVayMuaXe();
                 break;
             case 8:
                 kiemTraSoNguyen();
