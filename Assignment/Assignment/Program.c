@@ -1,10 +1,10 @@
-// CConsoleApplication.c : file nay chua 'main' function. 
+﻿// CConsoleApplication.c : file nay chua 'main' function. 
 // Chuong trinh phan mem Bat dau thuc thi & Ket thuc o day.
 
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
-
+//code kiểm tra số nguyên
 bool kiemtrasonguyento(int n) {
     if (n < 2) return false;
     for (int i = 2; i <= sqrt(n); i++) {
@@ -21,6 +21,7 @@ void kiemTraSoNguyen()
     int i = 1;
     while (i == 1)
     {
+        system("cls");
         int x;
         printf("nhap x: "); scanf_s("%d", &x);
 
@@ -43,7 +44,7 @@ void kiemTraSoNguyen()
 
     }
 }
-
+//code tìm ước bội chung
 int timUCLN(int a, int b) {
     while (b != 0) {
         int temp = b;
@@ -75,7 +76,7 @@ void timUocBoiChung() {
 
     }
 }
-
+// code tính tiền karaoke
 float tinhTienKaraoke(int gioBatDau, int gioKetThuc) {
     int soGio = gioKetThuc - gioBatDau;
     float tongTien = 0;
@@ -103,6 +104,7 @@ void tinhTienChoKaraoke() {
     int i = 1;
     while (i == 1)
     {
+        system("cls");
         int gioBatDau, gioKetThuc;
         printf("nhap gio bat dau (12h-23h): "); scanf_s("%d", &gioBatDau);
         printf("nhap gio ket thuc(12h-23h): "); scanf_s("%d", &gioKetThuc);
@@ -117,7 +119,7 @@ void tinhTienChoKaraoke() {
 
     }
 }
-
+// code tính tiền điện
 float tinhTienDien(int soKwh) {
     float tongTien = 0;
 
@@ -143,6 +145,7 @@ float tinhTienDien(int soKwh) {
 }
 void tinhTienDienBacThang() {
     
+    system("cls");
     int i = 1;
     while (i == 1)
     {
@@ -163,6 +166,82 @@ void tinhTienDienBacThang() {
 
     }
 }
+// code đổi tiền
+void doiTien() {
+   
+    int i = 1;
+    while (i == 1)
+    {
+        system("cls");
+        int menhGia[] = { 500, 200, 100, 50, 20, 10, 5, 2, 1 };
+        int soTo[9] = { 0 };
+        int soTien;
+
+        printf("Nhap so tien can doi: ");
+        scanf_s("%d", &soTien);
+
+        if (soTien <= 0) {
+        printf("So tien can doi khong hop le!\n");
+        }
+        else {
+            printf("So tien can doi: %d nghin dong\n", soTien);
+
+            for (int i = 0; i < 9; i++) {
+                if (soTien >= menhGia[i]) {
+                soTo[i] = soTien / menhGia[i];
+                soTien -= soTo[i] * menhGia[i];
+                }
+            }
+            printf("Ket qua doi tien:\n");
+            for (int i = 0; i < 9; i++) {
+                if (soTo[i] > 0)
+                    printf("%d to %d nghin\n", soTo[i], menhGia[i]);
+            }
+        }
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
+// code Tính toán vay ngân hàng
+void tinhToanVayNganHang() {
+    
+    int i = 1;
+    while (i == 1)
+    {
+        system("cls");
+        float soTienVay;
+        printf("So tien muon vay: ");
+        scanf("%f", &soTienVay);
+
+        if (soTienVay <= 0) {
+            printf("So tien vay phai > 0\n");
+        }
+        else {
+            float laiSuatThang = 0.05;
+            float tienGocHangThang = soTienVay / 12;
+            float tongTienTra = 0;
+
+            printf("So tien vay: %.2f VND\n", soTienVay);
+            printf("Chi tiet cac khoan phai tra hang thang:\n");
+
+            for (int thang = 1; thang <= 12; thang++) {
+                float tienLaiThang = soTienVay * laiSuatThang;
+                float tienTraHangThang = tienGocHangThang + tienLaiThang;
+                printf("Thang %d: Tien goc = %.2f, Tien lai = %.2f, Tong = %.2f\n",thang, tienGocHangThang, tienLaiThang, tienTraHangThang);
+                tongTienTra += tienTraHangThang;
+                soTienVay -= tienGocHangThang;
+            }
+
+            printf("Tong so tien phai tra sau 12 thang: %.2f VND\n", tongTienTra);
+        }
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
+
+    }
+}
+
+
 
 
 void MenuASM()
@@ -245,18 +324,20 @@ int main()
         {
             system("cls");
             printf("* Menu Chuc Nang *"); printf("\n");
-            printf("1. Kiem tra so nguyen"); printf("\n");
-            printf("2. Uoc chung & Boi chung cua 2 so"); printf("\n");
-            printf("3. Tinh tien quan Karaoke"); printf("\n");
-            printf("4. Tinh tien dien"); printf("\n");
-            printf("5. Doi tien"); printf("\n");
-            printf("6. Tinh lai xuat vay ngan hang tra gop"); printf("\n");
-            printf("7. Vay tien mua xe"); printf("\n");
-            printf("8. Sap xep thong tin sinh vien"); printf("\n");
-            printf("9. Xay u game FPOLY-LOTT"); printf("\n");
-            printf("10. Tinh toan phan so"); printf("\n");
-            printf("0. thoat"); printf("\n");
-            printf("xin moi chon chuc nang tren menu: ");
+            printf("*________________________________________*"); printf("\n");
+            printf("| 1. Kiem tra so nguyen                  |"); printf("\n");
+            printf("| 2. Uoc chung & Boi chung cua 2 so      |"); printf("\n");
+            printf("| 3. Tinh tien quan Karaoke              |"); printf("\n");
+            printf("| 4. Tinh tien dien                      |"); printf("\n");
+            printf("| 5. Doi tien                            |"); printf("\n");
+            printf("| 6. Tinh lai xuat vay ngan hang tra gop |"); printf("\n");
+            printf("| 7. Vay tien mua xe                     |"); printf("\n");
+            printf("| 8. Sap xep thong tin sinh vien         |"); printf("\n");
+            printf("| 9. Xay u game FPOLY-LOTT               |"); printf("\n");
+            printf("| 10. Tinh toan phan so                  |"); printf("\n");
+            printf("| 0. thoat                               |"); printf("\n");
+            printf("|________________________________________|"); printf("\n");
+            printf("* Xin moi chon chuc nang tren menu * : ");
             scanf_s("%d", &chon);
 
             switch (chon)
@@ -274,10 +355,10 @@ int main()
                 tinhTienDienBacThang();
                 break;
             case 5:
-                kiemTraSoNguyen();
+                doiTien();
                 break;
             case 6:
-                kiemTraSoNguyen();
+                tinhToanVayNganHang();
                 break;
             case 7:
                 kiemTraSoNguyen();
