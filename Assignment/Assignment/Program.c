@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#define MAX 100
 
 
 //code kiểm tra số nguyên
@@ -345,83 +346,73 @@ void playFPOLY_LOTT()
 }
 
 
-
-
-void MenuASM()
-{
-    int chon;
-    do
+// code sắp xếp thông tin
+typedef struct {
+    char hoTen[50];
+    float diem;
+    char hocLuc[20];
+} SinhVien;
+void sapXepThongTin() {
+    
+    int i = 1;
+    while (i == 1)
     {
+        SinhVien sv[MAX];
+        int n;
 
-        printf("* Menu Chuc Nang *"); printf("\n");
-        printf("1. Kiem tra so nguyen"); printf("\n");
-        printf("2. Uoc chung & Boi chung cua 2 so"); printf("\n");
-        printf("3. Tinh tien quan Karaoke"); printf("\n");
-        printf("4. Tinh tien dien"); printf("\n");
-        printf("5. Doi tien"); printf("\n");
-        printf("6. Tinh lai xuat vay ngan hang tra gop"); printf("\n");
-        printf("7. Vay tien mua xe"); printf("\n");
-        printf("8. Sap xep thong tin sinh vien"); printf("\n");
-        printf("9. Xay u game FPOLY-LOTT"); printf("\n");
-        printf("10. Tinh toan phan so"); printf("\n");
-        printf("0. thoat"); printf("\n");
-        printf("xin moi chon chuc nang tren menu: ");
-        scanf_s("%d", &chon);
+        printf("Nhap so luong sinh vien: ");
+        scanf("%d", &n);
+        getchar();
 
-        switch (chon)
-        {
-        case 1:
-            kiemTraSoNguyen();
-            break;
-        case 2:
-            kiemTraSoNguyen();
-            break;
-        case 3:
-            kiemTraSoNguyen();
-            break;
-        case 4:
-            kiemTraSoNguyen();
-            break;
-        case 5:
-            kiemTraSoNguyen();
-            break;
-        case 6:
-            kiemTraSoNguyen();
-            break;
-        case 7:
-            kiemTraSoNguyen();
-            break;
-        case 8:
-            kiemTraSoNguyen();
-            break;
-        case 9:
-            kiemTraSoNguyen();
-            break;
-        case 10:
-            kiemTraSoNguyen();
-            break;
-        case 0:
-            printf("THOAT");
-            break;
-        default:
-            printf("Xin moi nhap dung chuc nang tren menu [1-10]");
-            break;
 
+        for (int i = 0; i < n; i++) {
+            printf("Nhap ho ten sinh vien %d: ", i + 1);
+            fgets(sv[i].hoTen, sizeof(sv[i].hoTen), stdin);
+            sv[i].hoTen[strcspn(sv[i].hoTen, "\n")] = '\0';
+
+            printf("Nhap diem sinh vien %d: ", i + 1);
+            scanf("%f", &sv[i].diem);
+            getchar();
+
+            if (sv[i].diem >= 9.0)
+                strcpy(sv[i].hocLuc, "Xuat sac");
+            else if (sv[i].diem >= 8.0)
+                strcpy(sv[i].hocLuc, "Gioi");
+            else if (sv[i].diem >= 6.5)
+                strcpy(sv[i].hocLuc, "Kha");
+            else if (sv[i].diem >= 5.0)
+                strcpy(sv[i].hocLuc, "Trung binh");
+            else
+                strcpy(sv[i].hocLuc, "Yeu");
         }
 
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (sv[i].diem < sv[j].diem) {
+                    SinhVien temp = sv[i];
+                    sv[i] = sv[j];
+                    sv[j] = temp;
+                }
+            }
+        }
 
+        printf("\nDanh sach sinh vien sau khi sap xep:\n");
+        for (int i = 0; i < n; i++) {
+            printf("%d. %s - Diem: %.2f - Hoc luc: %s\n",
+                i + 1, sv[i].hoTen, sv[i].diem, sv[i].hocLuc);
+        }
+        printf("ban muon tiep tuc chuc nang nua ko: [1 = Tiep tuc], [So bat ki khac 1 = thoat ra menu] ");
+        scanf_s("%d", &i);
 
-    } while (chon != 0);
+    }
 }
 
 
 
 
-
-int main()
+void MenuASM()
 {
-    void MenuASM();
-    {
+
         int chon;
         do
         {
@@ -467,13 +458,13 @@ int main()
                 tinhTienVayMuaXe();
                 break;
             case 8:
-                
+                sapXepThongTin();
                 break;
             case 9:
                 playFPOLY_LOTT();
                 break;
             case 10:
-                
+
                 break;
             case 0:
                 printf("THOAT");
@@ -487,7 +478,15 @@ int main()
 
 
         } while (chon != 0);
-    }
+}
+
+
+
+
+
+int main()
+{
+    MenuASM();
 
 }
 

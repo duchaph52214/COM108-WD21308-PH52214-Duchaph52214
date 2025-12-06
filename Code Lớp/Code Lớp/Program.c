@@ -179,11 +179,11 @@ void mangHaiChieu()
 
 void mangKiTu() {
     char mangKiTu[10] = "Duc";
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 10; i++)
     {
         scanf_s("% c", &mangKiTu[i]);
     }
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 10; i++)
     {
         printf("%c", mangKiTu[i]);
     }
@@ -191,72 +191,8 @@ void mangKiTu() {
 
 int main()
 {
-    void MenuASM1();
-    {
-        int chon;
-        do
-        {
-            system("cls");
-            printf("* Menu Chuc Nang *"); printf("\n");
-            printf("1. Kiem tra so nguyen"); printf("\n");
-            printf("2. Uoc chung & Boi chung cua 2 so"); printf("\n");
-            printf("3. Tinh tien quan Karaoke"); printf("\n");
-            printf("4. Tinh tien dien"); printf("\n");
-            printf("5. Doi tien"); printf("\n");
-            printf("6. Tinh lai xuat vay ngan hang tra gop"); printf("\n");
-            printf("7. Vay tien mua xe"); printf("\n");
-            printf("8. Sap xep thong tin sinh vien"); printf("\n");
-            printf("9. Xay u game FPOLY-LOTT"); printf("\n");
-            printf("10. Tinh toan phan so"); printf("\n");
-            printf("0. thoat"); printf("\n");
-            printf("xin moi chon chuc nang tren menu: ");
-            scanf_s("%d", &chon);
+    mangKiTu();
 
-            switch (chon)
-            {
-            case 1:
-                congTruNhanChia();
-                break;
-            case 2:
-                congTruNhanChia();
-                break;
-            case 3:
-                congTruNhanChia();
-                break;
-            case 4:
-                congTruNhanChia();
-                break;
-            case 5:
-                congTruNhanChia();
-                break;
-            case 6:
-                congTruNhanChia();
-                break;
-            case 7:
-                congTruNhanChia();
-                break;
-            case 8:
-                congTruNhanChia();
-                break;
-            case 9:
-                congTruNhanChia();
-                break;
-            case 10:
-                congTruNhanChia();
-                break;
-            case 0:
-                printf("THOAT");
-                break;
-            default:
-                printf("Xin moi nhap dung chuc nang tren menu [1-10]");
-                break;
-
-            }
-
-
-
-        } while (chon != 0);
-    }
 }
 
 
